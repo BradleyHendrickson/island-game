@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://babg8kxvbh1pg"]
 
-[ext_resource type="TileSet" path="res://resource/tileset/island_tileset.tres" id="1_tileset"]
+[ext_resource type="TileSet" uid="uid://b6eo6q7axirnj" path="res://resource/tileset/island_tileset.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://scene/player/player.tscn" id="3_player"]
-[ext_resource type="PackedScene" path="res://scene/ui/settings_menu.tscn" id="4_settings"]
+[ext_resource type="PackedScene" uid="uid://cc7ipbcrfuwlg" path="res://scene/ui/settings_menu.tscn" id="4_settings"]
 
 [node name="World" type="Node2D" unique_id=190830385]
 
@@ -13,4 +13,4 @@ tile_set = ExtResource("1_tileset")
 [node name="Player" parent="." unique_id=249472589 instance=ExtResource("3_player")]
 position = Vector2(248, 248)
 
-[node name="SettingsMenu" parent="." instance=ExtResource("4_settings")]
+[node name="SettingsMenu" parent="." unique_id=1910216643 instance=ExtResource("4_settings")]
