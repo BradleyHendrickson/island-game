@@ -1,0 +1,174 @@
+[gd_scene format=4 uid="uid://cc7ipbcrfuwlg"]
+
+[ext_resource type="Script" path="res://scene/ui/settings_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://ulfh10874ly" path="res://resource/sprite/settings.png" id="2_icon"]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1_script")
+
+[node name="Root" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+custom_minimum_size = Vector2(440, 0)
+
+[node name="Margin" type="MarginContainer" parent="Root/Center/Panel"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/Margin"]
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/Center/Panel/Margin/VBox/Header"]
+texture_filter = 1
+custom_minimum_size = Vector2(28, 28)
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Root/Center/Panel/Margin/VBox/Header"]
+text = "Settings"
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+
+[node name="HeaderSeparator" type="HSeparator" parent="Root/Center/Panel/Margin/VBox"]
+
+[node name="Tabs" type="TabContainer" parent="Root/Center/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 210)
+size_flags_vertical = 3
+
+[node name="Display" type="VBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs"]
+theme_override_constants/separation = 12
+
+[node name="FullscreenRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs/Display"]
+
+[node name="Label" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Display/FullscreenRow"]
+size_flags_horizontal = 3
+text = "Fullscreen"
+vertical_alignment = 1
+
+[node name="FullscreenCheck" type="CheckButton" parent="Root/Center/Panel/Margin/VBox/Tabs/Display/FullscreenRow"]
+unique_name_in_owner = true
+
+[node name="VSyncRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs/Display"]
+
+[node name="Label" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Display/VSyncRow"]
+size_flags_horizontal = 3
+text = "V-Sync"
+vertical_alignment = 1
+
+[node name="VSyncCheck" type="CheckButton" parent="Root/Center/Panel/Margin/VBox/Tabs/Display/VSyncRow"]
+unique_name_in_owner = true
+
+[node name="Audio" type="VBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs"]
+visible = false
+theme_override_constants/separation = 12
+
+[node name="MasterRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio"]
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MasterRow"]
+custom_minimum_size = Vector2(90, 0)
+text = "Master"
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MasterRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MasterValue" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MasterRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio"]
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MusicRow"]
+custom_minimum_size = Vector2(90, 0)
+text = "Music"
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MusicRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicValue" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/MusicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio"]
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/SFXRow"]
+custom_minimum_size = Vector2(90, 0)
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/SFXRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXValue" type="Label" parent="Root/Center/Panel/Margin/VBox/Tabs/Audio/SFXRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FooterSeparator" type="HSeparator" parent="Root/Center/Panel/Margin/VBox"]
+
+[node name="Buttons" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+alignment = 2
+theme_override_constants/separation = 10
+
+[node name="QuitButton" type="Button" parent="Root/Center/Panel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+text = "Quit Game"
+
+[node name="ResumeButton" type="Button" parent="Root/Center/Panel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+text = "Resume"
