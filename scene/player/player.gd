@@ -7,8 +7,13 @@ extends CharacterBody2D
 @export var corner_correction: float = 6.0
 ## Fraction (0–1) of the player's footprint that must overlap shallow water before
 ## wading. At 1.0 the player only wades when fully in the water, so standing even a
-## little on solid ground keeps the normal walk animation/speed.
+## little on solid ground keeps the normal walk animation/speed. Used when moving
+## horizontally (crossing a vertical sand/water edge).
 @export_range(0.0, 1.0, 0.01) var wade_threshold: float = 1.0
+## Same as wade_threshold but applied when the player is moving mostly vertically
+## (down from sand into water, or up from water onto sand). Kept smaller so vertical
+## transitions begin wading with less overlap than horizontal ones.
+@export_range(0.0, 1.0, 0.01) var wade_threshold_vertical: float = 0.5
 @export var walk_texture: Texture2D
 @export var wade_texture: Texture2D
 
@@ -23,6 +28,8 @@ const FOOTPRINT_SAMPLES := 3
 var _step_timer: float = 0.0
 var _footprint_offset: Vector2 = Vector2(0, 3)
 var _footprint_half: Vector2 = Vector2(5, 4)
+## Last non-zero move direction, used to pick the horizontal vs vertical wade threshold.
+var _last_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	if walk_texture == null:
@@ -40,6 +47,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if direction != Vector2.ZERO:
+		_last_direction = direction
 	var move_speed := _get_move_speed()
 	velocity = direction * move_speed
 	if direction != Vector2.ZERO:
@@ -53,7 +62,14 @@ func _get_move_speed() -> float:
 	return speed
 
 func _is_in_shallow_water() -> bool:
-	return _shallow_water_coverage() >= wade_threshold
+	return _shallow_water_coverage() >= _current_wade_threshold()
+
+## Smaller threshold while moving mostly vertically so up/down sand<->water
+## transitions wade sooner; horizontal movement keeps the full wade_threshold.
+func _current_wade_threshold() -> float:
+	if absf(_last_direction.y) > absf(_last_direction.x):
+		return wade_threshold_vertical
+	return wade_threshold
 
 ## Fraction of the player's footprint (sampled on a grid) sitting on shallow water.
 func _shallow_water_coverage() -> float:
